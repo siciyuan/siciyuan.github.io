@@ -53,7 +53,7 @@
   
   "footer": {
     "copyright": "© 2026 鳞游. 保留所有权利.",
-    "extraInfo": "基于 Vue 3 和 Tailwind CSS 构建",
+    "extraInfo": "由Vue与Tailwind CSS 构建",
     "links": [
       { "id": 1, "name": "隐私政策", "url": "#" },
       { "id": 2, "name": "使用条款", "url": "#" },
