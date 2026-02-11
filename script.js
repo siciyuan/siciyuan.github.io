@@ -9,82 +9,69 @@ let globalConfig = {};
 const MusicPlayer = {
     template: `
         <div class="player-container">
-            <div class="floating-player glass-card p-4">
+            <div class="floating-player glass-card p-3">
                 <div class="container mx-auto max-w-6xl">
-                    <div class="flex flex-col md:flex-row items-center justify-between">
-                        <!-- 当前播放 -->
-                        <div class="flex items-center space-x-4 mb-4 md:mb-0 w-full md:w-auto">
+                    <!-- 第一行：当前播放信息和播放列表按钮 -->
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center space-x-3 flex-1">
                             <img 
                                 :src="currentTrack.cover" 
                                 alt="专辑封面"
-                                class="w-12 h-12 md:w-12 md:h-12 rounded-lg"
+                                class="w-10 h-10 rounded-lg"
                             >
-                            <div class="flex-1">
-                                <h4 class="font-medium text-sm md:text-base truncate">{{ currentTrack.title }}</h4>
-                                <p class="text-xs md:text-sm opacity-80 truncate">{{ currentTrack.artist }}</p>
+                            <div class="flex-1 min-w-0">
+                                <h4 class="font-medium text-sm truncate">{{ currentTrack.title }}</h4>
+                                <p class="text-xs opacity-80 truncate">{{ currentTrack.artist }}</p>
                             </div>
                         </div>
-                        
-                        <!-- 播放控制 -->
-                        <div class="flex items-center space-x-4 md:space-x-6 w-full md:w-auto justify-between md:justify-center">
-                            <button @click="prevTrack" class="hover:text-white/80 p-2">
-                                <i class="fas fa-step-backward text-lg"></i>
-                            </button>
-                            <button @click="togglePlay" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                                <i v-if="isPlaying" class="fas fa-pause"></i>
-                                <i v-else class="fas fa-play"></i>
-                            </button>
-                            <button @click="nextTrack" class="hover:text-white/80 p-2">
-                                <i class="fas fa-step-forward text-lg"></i>
+                        <div class="relative ml-2">
+                            <button @click="showPlaylist = !showPlaylist" class="flex items-center space-x-1 hover:text-white/80 p-1">
+                                <i class="fas fa-list text-sm"></i>
+                                <span class="hidden sm:inline text-xs">播放列表</span>
                             </button>
                             
-                            <!-- 播放列表 -->
-                            <div class="relative">
-                                <button @click="showPlaylist = !showPlaylist" class="flex items-center space-x-2 hover:text-white/80 p-2">
-                                    <i class="fas fa-list"></i>
-                                    <span class="hidden sm:inline">播放列表</span>
-                                </button>
-                                
-                                <!-- 播放列表下拉 -->
+                            <!-- 播放列表下拉 -->
+                            <div 
+                                v-if="showPlaylist" 
+                                class="absolute bottom-full right-0 mb-2 w-64 sm:w-72 max-h-80 overflow-y-auto glass-card rounded-xl p-2"
+                            >
                                 <div 
-                                    v-if="showPlaylist" 
-                                    class="absolute bottom-full right-0 mb-2 w-64 sm:w-72 max-h-80 overflow-y-auto glass-card rounded-xl p-2"
+                                    v-for="(track, index) in playlist" 
+                                    :key="track.id"
+                                    @click="playTrack(index)"
+                                    class="p-3 rounded-lg hover:bg-white/20 cursor-pointer flex items-center space-x-3"
+                                    :class="{'bg-white/20': index === currentTrackIndex}"
                                 >
-                                    <div 
-                                        v-for="(track, index) in playlist" 
-                                        :key="track.id"
-                                        @click="playTrack(index)"
-                                        class="p-3 rounded-lg hover:bg-white/20 cursor-pointer flex items-center space-x-3"
-                                        :class="{'bg-white/20': index === currentTrackIndex}"
-                                    >
-                                        <img :src="track.cover" class="w-10 h-10 rounded" alt="封面">
-                                        <div class="flex-1">
-                                            <h4 class="font-medium text-sm truncate">{{ track.title }}</h4>
-                                            <p class="text-xs opacity-80 truncate">{{ track.artist }}</p>
-                                        </div>
-                                        <i v-if="index === currentTrackIndex && isPlaying" class="fas fa-volume-up"></i>
+                                    <img :src="track.cover" class="w-10 h-10 rounded" alt="封面">
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-sm truncate">{{ track.title }}</h4>
+                                        <p class="text-xs opacity-80 truncate">{{ track.artist }}</p>
                                     </div>
+                                    <i v-if="index === currentTrackIndex && isPlaying" class="fas fa-volume-up"></i>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第二行：播放控制和进度条 -->
+                    <div class="flex items-center justify-between">
+                        <!-- 播放控制 -->
+                        <div class="flex items-center space-x-3">
+                            <button @click="prevTrack" class="hover:text-white/80 p-1">
+                                <i class="fas fa-step-backward text-sm"></i>
+                            </button>
+                            <button @click="togglePlay" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                                <i v-if="isPlaying" class="fas fa-pause text-xs"></i>
+                                <i v-else class="fas fa-play text-xs"></i>
+                            </button>
+                            <button @click="nextTrack" class="hover:text-white/80 p-1">
+                                <i class="fas fa-step-forward text-sm"></i>
+                            </button>
                         </div>
                         
                         <!-- 进度条 -->
-                        <div class="hidden md:block w-64">
-                            <div class="flex items-center space-x-4">
-                                <span class="text-sm">{{ formatTime(currentTime) }}</span>
-                                <div class="flex-1 h-1 bg-white/20 rounded-full overflow-hidden">
-                                    <div 
-                                        class="h-full bg-white/70 rounded-full"
-                                        :style="{width: progress + '%'}"
-                                    ></div>
-                                </div>
-                                <span class="text-sm">{{ formatTime(duration) }}</span>
-                            </div>
-                        </div>
-                        
-                        <!-- 移动端进度条 -->
-                        <div class="w-full mt-3 md:hidden">
-                            <div class="flex items-center space-x-2">
+                        <div class="flex-1 mx-3">
+                            <div class="flex items-center space-x-1">
                                 <span class="text-xs">{{ formatTime(currentTime) }}</span>
                                 <div class="flex-1 h-1 bg-white/20 rounded-full overflow-hidden">
                                     <div 
