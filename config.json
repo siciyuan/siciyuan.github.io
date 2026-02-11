@@ -24,7 +24,7 @@
   "friendLinks": [
     { "id": 1, "name": "Alice的技术博客", "description": "前端开发", "icon": "fab fa-react", "iconType": "fontawesome", "url": "https://example.com" },
     { "id": 2, "name": "Bob的设计工坊", "description": "UI/UX设计", "icon": "fab fa-figma", "iconType": "fontawesome", "url": "https://example.com" },
-    { "id": 3, "name": "Charlie的实验室", "description": "人工智能", "icon": "https://img.icons8.com/color/48/000000/artificial-intelligence.png", "iconType": "image", "url": "https://example.com" }
+    { "id": 3, "name": "A.C·TD（狙宿/宿长）的个人主页", "description": "开发者主页", "icon": "https://m.ccw.site/avatar/87fa8782-68ff-4f6e-b225-7595e29171f6.png?x-oss-process=image%2Fresize%2Cs_150%2Fformat%2Cwebp", "iconType": "image", "url": "https://www.ccw.site/student/63ef2da0e77d1a05041bd28a" }
   ],
   
   "quickLinks": [
