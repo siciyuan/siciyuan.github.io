@@ -9,7 +9,7 @@ let globalConfig = {};
 const MusicPlayer = {
     template: `
         <div class="player-container">
-            <div class="floating-player glass-card p-3">
+            <div class="floating-player glass-card p-3 rounded-t-2xl shadow-lg">
                 <div class="container mx-auto max-w-6xl">
                     <!-- 第一行：当前播放信息和播放列表按钮 -->
                     <div class="flex items-center justify-between mb-2">
