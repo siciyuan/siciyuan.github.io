@@ -40,15 +40,16 @@
     { "id": 3, "title": "随机歌曲", "artist": "测试3", "duration": 210, "cover": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80", "audio": "https://cdn.pixabay.com/audio/2023/09/27/audio_ac0e03a27a.mp3" }
   ],
   
+  
   "themes": [
-    { "id": "light", "name": "亮白", "color": "#ffffff", "bg": "#f8fafc", "text": "#1e293b" },
-    { "id": "graphite", "name": "石墨黑", "color": "#374151", "bg": "#111827", "text": "#f9fafb" },
-    { "id": "lime", "name": "青柠", "color": "#84cc16", "bg": "#1a2e05", "text": "#f0fdf4" },
-    { "id": "lemon", "name": "柠黄", "color": "#facc15", "bg": "#422006", "text": "#fefce8" },
-    { "id": "apple", "name": "苹果绿", "color": "#22c55e", "bg": "#052e16", "text": "#f0fdf4" },
-    { "id": "water", "name": "水蓝", "color": "#0ea5e9", "bg": "#0c4a6e", "text": "#f0f9ff" },
-    { "id": "cherry", "name": "樱红", "color": "#f43f5e", "bg": "#881337", "text": "#fff1f2" },
-    { "id": "lavender", "name": "薰衣草紫", "color": "#a855f7", "bg": "#3b0764", "text": "#faf5ff" }
+    { "id": "light", "name": "亮白", "color": "#f8fafc", "bg": "#f1f5f9", "text": "#475569" },
+    { "id": "graphite", "name": "石墨黑", "color": "#64748b", "bg": "#1e293b", "text": "#e2e8f0" },
+    { "id": "lime", "name": "青柠", "color": "#a3e635", "bg": "#fefce8", "text": "#4d7c0f" },
+    { "id": "lemon", "name": "柠黄", "color": "#fde68a", "bg": "#fffbeb", "text": "#a16207" },
+    { "id": "apple", "name": "苹果绿", "color": "#4ade80", "bg": "#f0fdf4", "text": "#166534" },
+    { "id": "water", "name": "水蓝", "color": "#60a5fa", "bg": "#eff6ff", "text": "#1e40af" },
+    { "id": "cherry", "name": "樱红", "color": "#fda4af", "bg": "#fef2f2", "text": "#9f1239" },
+    { "id": "lavender", "name": "薰衣草紫", "color": "#c4b5fd", "bg": "#faf5ff", "text": "#6b21a8" }
   ],
   
   "footer": {
