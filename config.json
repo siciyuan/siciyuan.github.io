@@ -17,7 +17,8 @@
     { "id": 2, "name": "GITEE", "icon": "https://gitee.com/favicon.ico", "iconType": "image", "url": "https://gitee.com/scroam" },
     { "id": 3, "name": "Email", "icon": "fas fa-envelope", "iconType": "fontawesome", "url": "mailto:admin@world123.top" },
     { "id": 4, "name": "CCW", "icon": "https://m.ccw.site/community/images/logo-ccw.png", "iconType": "image", "url": "https://www.ccw.site/student/65cf41ca4b42321bf8da5ece" },
-    { "id": 5, "name": "BILIBILI", "icon": "bilibili-favicon.ico", "iconType": "image", "url": "https://space.bilibili.com/385463410" }
+    { "id": 5, "name": "BILIBILI", "icon": "bilibili-favicon.ico", "iconType": "image", "url": "https://space.bilibili.com/385463410" },
+    { "id": 6, "name": "BILIBILI", "icon": "fab fa-qq", "iconType": "fontawesome", "url": "https://qm.qq.com/q/441rLZUwhG" }
 
   ],
   
