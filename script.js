@@ -320,7 +320,105 @@ createApp({
             }
         };
         
+        // 加载诗词
+        const loadPoem = async () => {
+            const poemContent = document.getElementById('poem-content');
+            const poemAuthor = document.getElementById('poem-author');
+            const poemLoading = document.getElementById('poem-loading');
+            const splashPoem = document.getElementById('splash-poem');
+            
+            if (!poemContent || !poemAuthor || !poemLoading || !splashPoem) return;
+            
+            // 显示加载状态
+            poemLoading.style.display = 'block';
+            poemContent.style.display = 'none';
+            poemAuthor.style.display = 'none';
+            
+            try {
+                // 尝试第一个API
+                let response = await fetch('https://xiaojiyun1.world123.top/yiyan/?format=text', {
+                    method: 'GET',
+                    mode: 'cors',
+                    timeout: 5000
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                let poem = await response.text();
+                
+                // 解析诗词内容和作者
+                const parts = poem.split('——');
+                if (parts.length === 2) {
+                    poemContent.textContent = parts[0].trim();
+                    poemAuthor.textContent = parts[1].trim();
+                } else {
+                    poemContent.textContent = poem.trim();
+                    poemAuthor.textContent = '—— 未知';
+                }
+            } catch (error) {
+                console.error('第一个API请求失败，尝试第二个API:', error);
+                try {
+                    // 尝试第二个API
+                    let response = await fetch('https://xiaojiyun.world123.top/yiyan/?format=text', {
+                        method: 'GET',
+                        mode: 'cors',
+                        timeout: 5000
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    let poem = await response.text();
+                    
+                    // 解析诗词内容和作者
+                    const parts = poem.split('——');
+                    if (parts.length === 2) {
+                        poemContent.textContent = parts[0].trim();
+                        poemAuthor.textContent = parts[1].trim();
+                    } else {
+                        poemContent.textContent = poem.trim();
+                        poemAuthor.textContent = '—— 未知';
+                    }
+                } catch (error2) {
+                    console.error('第二个API请求失败:', error2);
+                    // 使用默认诗词
+                    poemContent.textContent = '江山代有才人出，各领风骚数百年。';
+                    poemAuthor.textContent = '—— 赵翼《论诗》';
+                }
+            } finally {
+                // 隐藏加载状态，显示诗词
+                poemLoading.style.display = 'none';
+                poemContent.style.display = 'block';
+                poemAuthor.style.display = 'block';
+                
+                // 显示诗词
+                setTimeout(() => {
+                    poemContent.style.opacity = '1';
+                    poemAuthor.style.opacity = '1';
+                }, 100);
+                
+                // 根据诗词长度调整显示时间
+                const poemLength = poemContent.textContent.length;
+                const displayTime = Math.max(3000, poemLength * 100); // 每个字至少显示100ms
+                
+                // 显示完成后隐藏开屏
+                setTimeout(() => {
+                    splashPoem.style.opacity = '0';
+                    setTimeout(() => {
+                        splashPoem.style.display = 'none';
+                    }, 1000);
+                }, displayTime);
+            }
+        };
+        
         onMounted(() => {
+            // 先加载诗词
+            loadPoem();
+            
+            // 然后加载配置
             loadConfig();
             
             // 滚动动画逻辑
