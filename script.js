@@ -1,4 +1,7 @@
 
+// 主应用入口
+const { createApp, onMounted, reactive, computed, defineAsyncComponent } = Vue;
+
 // 全局配置
 let globalConfig = {};
 
