@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    
+    <!-- CDN 依赖 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+    <!-- 本地资源 -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="" id="favicon">
+</head>
+<body class="theme-transition min-h-screen">
+    <div id="app">
+        <!-- 粒子背景容器 -->
+        <div id="particles-bg" class="particles-bg"></div>
+        
+        <!-- 主题选择器 -->
+        <div class="theme-selector" v-if="config.themes">
+            <div class="glass-card rounded-full p-2 flex space-x-2">
+                <button 
+                    v-for="theme in config.themes" 
+                    :key="theme.id"
+                    @click="themeManager.changeTheme(theme.id)"
+                    class="w-6 h-6 rounded-full border-2 border-white/30 focus:outline-none transition-transform hover:scale-110"
+                    :style="{backgroundColor: theme.color}"
+                    :title="theme.name"
+                ></button>
+            </div>
+        </div>
+        
+        <!-- 主内容区域 -->
+        <main class="container mx-auto px-4 py-8 max-w-6xl">
+            <!-- 个人资料卡片 -->
+            <section class="glass-card rounded-2xl p-8 mb-8" v-if="config.profile">
+                <div class="flex flex-col md:flex-row items-center">
+                    <!-- 头像 -->
+                    <div class="mb-6 md:mb-0 md:mr-8">
+                        <img 
+                            :src="config.profile.avatar" 
+                            alt="头像"
+                            class="w-32 h-32 rounded-full border-4 border-white/30 object-cover"
+                        >
+                    </div>
+                    
+                    <!-- 个人信息 -->
+                    <div class="text-center md:text-left">
+                        <h1 class="text-3xl md:text-4xl font-bold mb-2">{{ config.profile.name }}</h1>
+                        <p class="text-lg opacity-90 mb-4">{{ config.profile.bio }}</p>
+                        
+                        <!-- 联系方式 -->
+                        <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                            <a 
+                                v-for="contact in config.contacts" 
+                                :key="contact.id"
+                                :href="contact.url" 
+                                target="_blank"
+                                class="flex items-center space-x-2 px-4 py-2 rounded-full glass-card hover:bg-white/20 transition-all duration-300"
+                            >
+                                <i v-if="contact.iconType === 'fontawesome'" :class="contact.icon" class="text-lg"></i>
+                                <img v-else :src="contact.icon" class="w-5 h-5" alt="图标">
+                                <span>{{ contact.name }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 主要内容区域 -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- 关于我 -->
+                <section class="glass-card rounded-2xl p-6 lg:col-span-2" v-if="config.profile">
+                    <h2 class="text-2xl font-bold mb-4">关于我</h2>
+                    <p class="opacity-90 leading-relaxed">{{ config.profile.about }}</p>
+                    
+                    <!-- 快速链接 -->
+                    <div class="mt-8" v-if="config.quickLinks">
+                        <h3 class="text-xl font-bold mb-4">快速链接</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <a 
+                                v-for="link in config.quickLinks" 
+                                :key="link.id"
+                                :href="link.url"
+                                class="px-4 py-2 rounded-lg glass-card hover:bg-white/20 transition-all duration-300"
+                            >
+                                {{ link.name }}
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 友情链接 -->
+                <section class="glass-card rounded-2xl p-6" v-if="config.friendLinks">
+                    <h2 class="text-2xl font-bold mb-4">友情链接</h2>
+                    <div class="space-y-4">
+                        <a 
+                            v-for="friend in config.friendLinks" 
+                            :key="friend.id"
+                            :href="friend.url" 
+                            target="_blank"
+                            class="flex items-center space-x-3 p-3 rounded-xl glass-card hover:bg-white/20 transition-all duration-300"
+                        >
+                            <div class="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
+                                <i v-if="friend.iconType === 'fontawesome'" :class="friend.icon" class="text-xl"></i>
+                                <img v-else :src="friend.icon" class="w-full h-full object-cover" alt="图标">
+                            </div>
+                            <div>
+                                <h4 class="font-medium">{{ friend.name }}</h4>
+                                <p class="text-sm opacity-80">{{ friend.description }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- 点击提示 -->
+            <div class="text-center mt-12 opacity-70 text-sm" v-if="config.settings?.enableClickEffects">
+                <p>点击页面任意位置查看社会主义核心价值观特效</p>
+            </div>
+        </main>
+        
+        <!-- 音乐播放器 -->
+        <music-player 
+            v-if="config.settings?.enableMusicPlayer && config.playlist"
+            :playlist="config.playlist"
+        ></music-player>
+        
+        <!-- 页脚 -->
+        <footer class="pt-16 pb-24 md:pb-32 text-center opacity-80" v-if="config.footer">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <p>{{ config.footer.copyright }}</p>
+                <p class="mt-2">{{ config.footer.extraInfo }}</p>
+                
+                <!-- 页脚链接 -->
+                <div class="flex flex-wrap justify-center gap-6 mt-6" v-if="config.footer.links">
+                    <a 
+                        v-for="link in config.footer.links" 
+                        :key="link.id"
+                        :href="link.url"
+                        class="hover:text-white/100 transition-colors"
+                    >
+                        {{ link.name }}
+                    </a>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- 社会主义核心价值观特效容器 -->
+        <div id="core-values-container" class="fixed top-0 left-0 w-full h-full pointer-events-none"></div>
+    </div>
+
+    <!-- 本地模块 -->
+    <script src="config.json"></script>
+    <script src="theme-manager.js"></script>
+    <script src="player.js"></script>
+    <script src="effects.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
