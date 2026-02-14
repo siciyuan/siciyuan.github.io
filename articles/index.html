@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>联系我</title>
+    <title>技术文章</title>
     
     <!-- CDN 依赖 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -35,136 +35,83 @@
         
         <!-- 主内容区域 -->
         <main class="container mx-auto px-4 py-8 max-w-6xl">
-            <!-- 联系标题 -->
-            <section class="glass-card rounded-2xl p-8 mb-8 scroll-reveal" v-if="config.contact">
-                <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">{{ config.contact.title }}</h1>
-                <p class="text-lg text-center opacity-90">{{ config.contact.description }}</p>
+            <!-- 文章标题 -->
+            <section class="glass-card rounded-2xl p-8 mb-8 scroll-reveal" v-if="config.articles">
+                <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">{{ config.articles.title }}</h1>
+                <p class="text-lg text-center opacity-90">{{ config.articles.description }}</p>
             </section>
             
-            <!-- 联系信息和表单 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                <!-- 联系信息 -->
-                <section class="glass-card rounded-2xl p-6 scroll-reveal">
-                    <h2 class="text-2xl font-bold mb-6">联系信息</h2>
-                    
-                    <!-- 邮箱 -->
-                    <div class="flex items-start mb-6">
-                        <div class="mr-4 mt-1">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold mb-1">邮箱</h3>
-                            <p class="opacity-90">{{ config.info.email }}</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 电话 -->
-                    <div class="flex items-start mb-6">
-                        <div class="mr-4 mt-1">
-                            <i class="fas fa-phone-alt text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold mb-1">电话</h3>
-                            <p class="opacity-90">{{ config.info.phone }}</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 地址 -->
-                    <div class="flex items-start mb-6">
-                        <div class="mr-4 mt-1">
-                            <i class="fas fa-map-marker-alt text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold mb-1">地址</h3>
-                            <p class="opacity-90">{{ config.info.address }}</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 社交媒体 -->
-                    <div class="mt-8">
-                        <h3 class="font-semibold mb-4">社交媒体</h3>
-                        <div class="flex space-x-4">
-                            <a 
-                                v-for="social in config.info.social" 
-                                :key="social.name"
-                                :href="social.url"
-                                target="_blank"
-                                class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-white/20 transition-all duration-300"
-                                :title="social.name"
-                            >
-                                <i :class="social.icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                </section>
-                
-                <!-- 联系表单 -->
-                <section class="glass-card rounded-2xl p-6 scroll-reveal">
-                    <h2 class="text-2xl font-bold mb-6">发送消息</h2>
-                    
-                    <form @submit.prevent="submitForm">
-                        <!-- 姓名 -->
-                        <div class="mb-4">
-                            <label :for="'name'" class="block mb-2">{{ config.contact.form.name.label }}</label>
-                            <input 
-                                type="text" 
-                                :id="'name'"
-                                v-model="formData.name"
-                                :placeholder="config.contact.form.name.placeholder"
-                                :required="config.contact.form.name.required"
-                                class="w-full px-4 py-2 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-white/30"
-                            >
-                        </div>
-                        
-                        <!-- 邮箱 -->
-                        <div class="mb-4">
-                            <label :for="'email'" class="block mb-2">{{ config.contact.form.email.label }}</label>
-                            <input 
-                                type="email" 
-                                :id="'email'"
-                                v-model="formData.email"
-                                :placeholder="config.contact.form.email.placeholder"
-                                :required="config.contact.form.email.required"
-                                class="w-full px-4 py-2 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-white/30"
-                            >
-                        </div>
-                        
-                        <!-- 主题 -->
-                        <div class="mb-4">
-                            <label :for="'subject'" class="block mb-2">{{ config.contact.form.subject.label }}</label>
-                            <input 
-                                type="text" 
-                                :id="'subject'"
-                                v-model="formData.subject"
-                                :placeholder="config.contact.form.subject.placeholder"
-                                :required="config.contact.form.subject.required"
-                                class="w-full px-4 py-2 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-white/30"
-                            >
-                        </div>
-                        
-                        <!-- 消息 -->
-                        <div class="mb-6">
-                            <label :for="'message'" class="block mb-2">{{ config.contact.form.message.label }}</label>
-                            <textarea 
-                                :id="'message'"
-                                v-model="formData.message"
-                                :placeholder="config.contact.form.message.placeholder"
-                                :required="config.contact.form.message.required"
-                                rows="4"
-                                class="w-full px-4 py-2 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-white/30"
-                            ></textarea>
-                        </div>
-                        
-                        <!-- 提交按钮 -->
-                        <button 
-                            type="submit" 
-                            class="w-full py-2 rounded-lg glass-card hover:bg-white/20 transition-all duration-300"
+            <!-- 文章分类 -->
+            <section class="mb-8" v-if="config.categories">
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button 
+                        v-for="category in config.categories" 
+                        :key="category.id"
+                        @click="filterByCategory(category.id)"
+                        class="px-4 py-2 rounded-full glass-card hover:bg-white/20 transition-all duration-300"
+                    >
+                        {{ category.name }}
+                    </button>
+                </div>
+            </section>
+            
+            <!-- 文章列表 -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16" v-if="filteredPosts.length > 0">
+                <div 
+                    v-for="post in filteredPosts" 
+                    :key="post.id"
+                    class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 scroll-reveal"
+                >
+                    <!-- 文章缩略图 -->
+                    <div class="mb-4 overflow-hidden rounded-xl">
+                        <img 
+                            :src="post.thumbnail" 
+                            :alt="post.title"
+                            class="w-full h-48 object-cover transition-transform duration-500 hover:scale-105"
                         >
-                            {{ config.contact.form.submit.label }}
-                        </button>
-                    </form>
-                </section>
-            </div>
+                    </div>
+                    
+                    <!-- 文章信息 -->
+                    <h2 class="text-xl font-bold mb-2">{{ post.title }}</h2>
+                    <p class="text-sm opacity-90 mb-4">{{ post.description }}</p>
+                    
+                    <!-- 文章元信息 -->
+                    <div class="flex flex-wrap gap-3 mb-4">
+                        <span class="px-2 py-1 bg-white/10 rounded text-xs">{{ getCategoryName(post.categoryId) }}</span>
+                        <span class="px-2 py-1 bg-white/10 rounded text-xs">{{ post.date }}</span>
+                        <span class="px-2 py-1 bg-white/10 rounded text-xs">
+                            <i class="fas fa-eye mr-1"></i>{{ post.readCount }}
+                        </span>
+                    </div>
+                    
+                    <!-- 文章标签 -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span 
+                            v-for="(tag, index) in post.tags" 
+                            :key="index"
+                            class="px-2 py-1 bg-white/10 rounded text-xs"
+                        >
+                            {{ tag }}
+                        </span>
+                    </div>
+                    
+                    <!-- 阅读按钮 -->
+                    <div class="text-center">
+                        <a 
+                            :href="post.url" 
+                            target="_blank"
+                            class="inline-block px-4 py-2 rounded-lg glass-card hover:bg-white/20 transition-all duration-300"
+                        >
+                            阅读全文
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 无文章提示 -->
+            <section class="glass-card rounded-2xl p-8 text-center" v-else-if="config.posts && config.posts.length === 0">
+                <p class="text-lg">暂无文章</p>
+            </section>
         </main>
         
         <!-- 页脚 -->
@@ -198,47 +145,18 @@
     <script src="../theme-manager.js"></script>
     <script src="../effects.js"></script>
     <script>
-        // 创建联系我Vue应用
-        const { createApp, onMounted, reactive, ref } = Vue;
+        // 创建技术文章Vue应用
+        const { createApp, onMounted, reactive, ref, computed } = Vue;
         
         createApp({
             setup() {
                 const config = reactive({
-                    contact: {
-                        title: "联系我",
-                        description: "如果您有任何问题或合作意向，欢迎随时联系我",
-                        form: {
-                            name: {
-                                label: "姓名",
-                                placeholder: "请输入您的姓名",
-                                required: true
-                            },
-                            email: {
-                                label: "邮箱",
-                                placeholder: "请输入您的邮箱",
-                                required: true
-                            },
-                            subject: {
-                                label: "主题",
-                                placeholder: "请输入消息主题",
-                                required: true
-                            },
-                            message: {
-                                label: "消息",
-                                placeholder: "请输入您的消息",
-                                required: true
-                            },
-                            submit: {
-                                label: "发送消息"
-                            }
-                        }
+                    articles: {
+                        title: "技术文章",
+                        description: "分享我的技术心得和学习笔记"
                     },
-                    info: {
-                        email: "siciyuan@example.com",
-                        phone: "+86 123 4567 8910",
-                        address: "北京市海淀区",
-                        social: []
-                    },
+                    categories: [],
+                    posts: [],
                     themes: [
                         { "id": "light", "name": "亮白", "color": "#f8fafc", "bg": "#f1f5f9", "text": "#475569" },
                         { "id": "graphite", "name": "石墨黑", "color": "#64748b", "bg": "#1e293b", "text": "#e2e8f0" },
@@ -265,14 +183,8 @@
                     }
                 });
                 
+                const selectedCategory = ref(null);
                 const themeManager = new ThemeManager();
-                const formData = reactive({
-                    name: '',
-                    email: '',
-                    subject: '',
-                    message: ''
-                });
-                const formSubmitted = ref(false);
                 const loading = ref(true);
                 
                 // 加载配置文件
@@ -288,15 +200,15 @@
                         // 合并主配置
                         Object.assign(config, mainData);
                         
-                        // 加载联系配置
-                        const contactResponse = await fetch('config.json');
-                        if (!contactResponse.ok) {
-                            throw new Error('Failed to load contact config.json');
+                        // 加载文章配置
+                        const articlesResponse = await fetch('config.json');
+                        if (!articlesResponse.ok) {
+                            throw new Error('Failed to load articles config.json');
                         }
-                        const contactData = await contactResponse.json();
+                        const articlesData = await articlesResponse.json();
                         
-                        // 合并联系配置
-                        Object.assign(config, contactData);
+                        // 合并文章配置
+                        Object.assign(config, articlesData);
                         
                         // 初始化主题
                         if (mainData.settings?.defaultTheme) {
@@ -321,88 +233,27 @@
                     }
                 };
                 
-                // 提交表单
-                const submitForm = async () => {
-                    // 表单验证
-                    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-                        alert('请填写所有必填字段');
-                        return;
+                // 过滤文章
+                const filteredPosts = computed(() => {
+                    if (!selectedCategory.value) {
+                        return config.posts;
                     }
-                    
-                    // 验证邮箱格式
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(formData.email)) {
-                        alert('请输入有效的邮箱地址');
-                        return;
+                    return config.posts.filter(post => post.categoryId === selectedCategory.value);
+                });
+                
+                // 按分类过滤
+                const filterByCategory = (categoryId) => {
+                    if (selectedCategory.value === categoryId) {
+                        selectedCategory.value = null;
+                    } else {
+                        selectedCategory.value = categoryId;
                     }
-                    
-                    // API地址列表
-                    const apiUrls = [
-                        'https://xiaojiyun1.world123.top/messageboard/',
-                        'https://xiaojiyun.world123.top/messageboard/'
-                    ];
-                    
-                    let success = false;
-                    let errorMessage = '提交失败，请稍后重试';
-                    
-                    // 尝试所有API地址
-                    for (const apiUrl of apiUrls) {
-                        try {
-                            console.log('Attempting to submit form to:', apiUrl);
-                            
-                            // 构建GET请求URL，使用查询参数传递数据
-                            const params = new URLSearchParams();
-                            params.append('name', formData.name);
-                            params.append('email', formData.email);
-                            params.append('subject', formData.subject);
-                            params.append('message', formData.message);
-                            
-                            const requestUrl = apiUrl + '?' + params.toString();
-                            console.log('Request URL:', requestUrl);
-                            
-                            // 提交表单数据到API（使用GET请求）
-                            const response = await fetch(requestUrl, {
-                                method: 'GET',
-                                mode: 'cors',
-                                credentials: 'omit',
-                                headers: {
-                                    'Accept': 'application/json'
-                                }
-                            });
-                            
-                            console.log('Response status:', response.status);
-                            console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-                            
-                            const result = await response.json();
-                            console.log('Response data:', result);
-                            
-                            if (result.status === 'success') {
-                                formSubmitted.value = true;
-                                
-                                // 重置表单
-                                setTimeout(() => {
-                                    formData.name = '';
-                                    formData.email = '';
-                                    formData.subject = '';
-                                    formData.message = '';
-                                    formSubmitted.value = false;
-                                }, 3000);
-                                
-                                success = true;
-                                break;
-                            } else {
-                                errorMessage = '提交失败: ' + result.message;
-                                console.log('API returned error:', errorMessage);
-                            }
-                        } catch (error) {
-                            console.error('Error submitting form to', apiUrl, ':', error);
-                            // 继续尝试下一个API地址
-                        }
-                    }
-                    
-                    if (!success) {
-                        alert(errorMessage);
-                    }
+                };
+                
+                // 获取分类名称
+                const getCategoryName = (categoryId) => {
+                    const category = config.categories.find(cat => cat.id === categoryId);
+                    return category ? category.name : '未分类';
                 };
                 
                 // 滚动动画逻辑
@@ -431,9 +282,10 @@
                 return {
                     config,
                     themeManager,
-                    formData,
-                    formSubmitted,
-                    submitForm,
+                    selectedCategory,
+                    filteredPosts,
+                    filterByCategory,
+                    getCategoryName,
                     loading
                 };
             }
