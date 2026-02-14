@@ -338,8 +338,8 @@
                     
                     // API地址列表
                     const apiUrls = [
-                        'https://xiaojiyun1.world123.top/Message%20Board/',
-                        'https://xiaojiyun.world123.top/Message%20Board/'
+                        'https://xiaojiyun1.world123.top/messageboard/',
+                        'https://xiaojiyun.world123.top/messageboard/'
                     ];
                     
                     let success = false;
@@ -351,6 +351,7 @@
                             // 提交表单数据到API
                             const response = await fetch(apiUrl, {
                                 method: 'POST',
+                                mode: 'cors',
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
