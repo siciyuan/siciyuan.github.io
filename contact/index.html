@@ -322,19 +322,69 @@
                 };
                 
                 // 提交表单
-                const submitForm = () => {
-                    // 这里可以添加表单验证和提交逻辑
-                    console.log('表单数据:', formData);
-                    formSubmitted.value = true;
+                const submitForm = async () => {
+                    // 表单验证
+                    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+                        alert('请填写所有必填字段');
+                        return;
+                    }
                     
-                    // 重置表单
-                    setTimeout(() => {
-                        formData.name = '';
-                        formData.email = '';
-                        formData.subject = '';
-                        formData.message = '';
-                        formSubmitted.value = false;
-                    }, 3000);
+                    // 验证邮箱格式
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(formData.email)) {
+                        alert('请输入有效的邮箱地址');
+                        return;
+                    }
+                    
+                    // API地址列表
+                    const apiUrls = [
+                        'https://xiaojiyun1.world123.top/Message%20Board/',
+                        'https://xiaojiyun.world123.top/Message%20Board/'
+                    ];
+                    
+                    let success = false;
+                    let errorMessage = '提交失败，请稍后重试';
+                    
+                    // 尝试所有API地址
+                    for (const apiUrl of apiUrls) {
+                        try {
+                            // 提交表单数据到API
+                            const response = await fetch(apiUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(formData)
+                            });
+                            
+                            const result = await response.json();
+                            
+                            if (result.status === 'success') {
+                                formSubmitted.value = true;
+                                
+                                // 重置表单
+                                setTimeout(() => {
+                                    formData.name = '';
+                                    formData.email = '';
+                                    formData.subject = '';
+                                    formData.message = '';
+                                    formSubmitted.value = false;
+                                }, 3000);
+                                
+                                success = true;
+                                break;
+                            } else {
+                                errorMessage = '提交失败: ' + result.message;
+                            }
+                        } catch (error) {
+                            console.error('Error submitting form to', apiUrl, ':', error);
+                            // 继续尝试下一个API地址
+                        }
+                    }
+                    
+                    if (!success) {
+                        alert(errorMessage);
+                    }
                 };
                 
                 // 滚动动画逻辑
