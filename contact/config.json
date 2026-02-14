@@ -29,24 +29,14 @@
     }
   },
   "info": {
-    "email": "siciyuan@example.com",
-    "phone": "+86 123 4567 8910",
-    "address": "北京市海淀区",
+    "email": "admin@world123.top",
+    "phone": "+86 150 6267 4741",
+    "address": "我就问不在Earth我在哪？",
     "social": [
       {
         "name": "GitHub",
         "url": "https://github.com/siciyuan",
         "icon": "fab fa-github"
-      },
-      {
-        "name": "Twitter",
-        "url": "https://twitter.com/siciyuan",
-        "icon": "fab fa-twitter"
-      },
-      {
-        "name": "LinkedIn",
-        "url": "https://linkedin.com/in/siciyuan",
-        "icon": "fab fa-linkedin"
       },
       {
         "name": "WeChat",
