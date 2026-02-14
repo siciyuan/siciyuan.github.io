@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开源项目</title>
+    
+    <!-- CDN 依赖 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+    <!-- 本地资源 -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../logo.ico">
+</head>
+<body class="theme-transition min-h-screen">
+    <div id="app">
+        <!-- 粒子背景容器 -->
+        <div id="particles-bg" class="particles-bg"></div>
+        
+        <!-- 主题选择器 -->
+        <div class="theme-selector" v-if="config.themes">
+            <div class="glass-card rounded-full p-2 flex space-x-2">
+                <button 
+                    v-for="theme in config.themes" 
+                    :key="theme.id"
+                    @click="themeManager.changeTheme(theme.id)"
+                    class="w-6 h-6 rounded-full border-2 border-white/30 focus:outline-none transition-transform hover:scale-110"
+                    :style="{backgroundColor: theme.color}"
+                    :title="theme.name"
+                ></button>
+            </div>
+        </div>
+        
+        <!-- 主内容区域 -->
+        <main class="container mx-auto px-4 py-8 max-w-6xl">
+            <!-- 项目标题 -->
+            <section class="glass-card rounded-2xl p-8 mb-8 scroll-reveal" v-if="config.projects">
+                <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">{{ config.projects.title }}</h1>
+                <p class="text-lg text-center opacity-90">{{ config.projects.description }}</p>
+            </section>
+            
+            <!-- 项目列表 -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16" v-if="config.repositories">
+                <div 
+                    v-for="repo in config.repositories" 
+                    :key="repo.id"
+                    class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 scroll-reveal"
+                >
+                    <!-- 项目名称 -->
+                    <h2 class="text-xl font-bold mb-2 flex items-center">
+                        <i class="fab fa-github mr-2"></i>
+                        {{ repo.name }}
+                    </h2>
+                    
+                    <!-- 项目描述 -->
+                    <p class="text-sm opacity-90 mb-4">{{ repo.description }}</p>
+                    
+                    <!-- 项目语言 -->
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-medium">
+                            {{ repo.language }}
+                        </span>
+                    </div>
+                    
+                    <!-- 项目统计信息 -->
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <div class="flex items-center space-x-1">
+                            <i class="fas fa-star"></i>
+                            <span class="text-sm">{{ repo.stars }}</span>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <i class="fas fa-code-branch"></i>
+                            <span class="text-sm">{{ repo.forks }}</span>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span class="text-sm">{{ repo.openIssues }}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 项目时间信息 -->
+                    <div class="text-xs opacity-70 mb-6">
+                        <p>创建于: {{ repo.createdAt }}</p>
+                        <p>更新于: {{ repo.updatedAt }}</p>
+                    </div>
+                    
+                    <!-- 项目标签 -->
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span 
+                            v-for="(topic, index) in repo.topics" 
+                            :key="index"
+                            class="px-2 py-1 bg-white/10 rounded text-xs"
+                        >
+                            {{ topic }}
+                        </span>
+                    </div>
+                    
+                    <!-- 项目链接 -->
+                    <div class="text-center">
+                        <a 
+                            :href="repo.url" 
+                            target="_blank"
+                            class="px-4 py-2 rounded-lg glass-card hover:bg-white/20 transition-all duration-300"
+                        >
+                            <i class="fas fa-external-link-alt mr-1"></i> 查看项目
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 无项目提示 -->
+            <section class="glass-card rounded-2xl p-8 text-center" v-else-if="!config.repositories || config.repositories.length === 0">
+                <p class="text-lg">暂无开源项目</p>
+            </section>
+        </main>
+        
+        <!-- 页脚 -->
+        <footer class="pt-16 pb-24 md:pb-32 text-center opacity-80" v-if="config.footer">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <p>{{ config.footer.copyright }}</p>
+                <p class="mt-2" v-html="config.footer.extraInfo"></p>
+                
+                <!-- 页脚链接 -->
+                <div class="flex flex-wrap justify-center gap-6 mt-6" v-if="config.footer.links">
+                    <a 
+                        v-for="link in config.footer.links" 
+                        :key="link.id"
+                        :href="link.url"
+                        class="hover:text-white/100 transition-colors"
+                    >
+                        {{ link.name }}
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
+今日总访问量 <span id="busuanzi_today_pv">加载中...</span> 次
+今日总访客数 <span id="busuanzi_today_uv">加载中...</span> 人
+本站总访问量 <span id="busuanzi_site_pv">加载中...</span> 次
+本站总访客数 <span id="busuanzi_site_uv">加载中...</span> 人
+本页总阅读量 <span id="busuanzi_page_pv">加载中...</span> 次
+本页总访客数 <span id="busuanzi_page_uv">加载中...</span> 人
+    <!-- 本地模块 -->
+    <script src="../theme-manager.js"></script>
+    <script src="../effects.js"></script>
+    <script>
+        // 创建开源项目Vue应用
+        const { createApp, onMounted, reactive, ref } = Vue;
+        
+        createApp({
+            setup() {
+                const config = reactive({
+                    projects: {
+                        title: "开源项目",
+                        description: "我参与开发的开源项目和个人项目"
+                    },
+                    repositories: [],
+                    themes: [
+                        { "id": "light", "name": "亮白", "color": "#f8fafc", "bg": "#f1f5f9", "text": "#475569" },
+                        { "id": "graphite", "name": "石墨黑", "color": "#64748b", "bg": "#1e293b", "text": "#e2e8f0" },
+                        { "id": "lime", "name": "青柠", "color": "#a3e635", "bg": "#fefce8", "text": "#4d7c0f" },
+                        { "id": "lemon", "name": "柠黄", "color": "#fde68a", "bg": "#fffbeb", "text": "#a16207" },
+                        { "id": "apple", "name": "苹果绿", "color": "#4ade80", "bg": "#f0fdf4", "text": "#166534" },
+                        { "id": "water", "name": "水蓝", "color": "#60a5fa", "bg": "#eff6ff", "text": "#1e40af" },
+                        { "id": "cherry", "name": "樱红", "color": "#fda4af", "bg": "#fef2f2", "text": "#9f1239" },
+                        { "id": "lavender", "name": "薰衣草紫", "color": "#c4b5fd", "bg": "#faf5ff", "text": "#6b21a8" }
+                    ],
+                    settings: {
+                        defaultTheme: "water",
+                        enableParticles: true
+                    },
+                    footer: {
+                        copyright: "© 2026 鳞游. 保留所有权利.",
+                        extraInfo: "由Vue与Tailwind CSS 构建 | 本页面后端由 <a href='https://www.xiaojiyun.com/aff/WPNPVVXD' target='_blank'>小鸡云</a> 提供 | 我日常玩的免费mc服务器就在这开的 <a href='https://www.xiaojiyun.com/aff/WPNPVVXD' target='_blank'>点击查看</a>",
+                        links: [
+                            { "id": 1, "name": "隐私政策", "url": "#" },
+                            { "id": 2, "name": "使用条款", "url": "#" },
+                            { "id": 3, "name": "站点地图", "url": "#" },
+                            { "id": 4, "name": "友情链接", "url": "#" }
+                        ]
+                    }
+                });
+                
+                const themeManager = new ThemeManager();
+                const loading = ref(true);
+                
+                // 加载配置文件
+                const loadConfig = async () => {
+                    try {
+                        // 加载主页面配置
+                        const mainResponse = await fetch('../config.json');
+                        if (!mainResponse.ok) {
+                            throw new Error('Failed to load main config.json');
+                        }
+                        const mainData = await mainResponse.json();
+                        
+                        // 合并主配置
+                        Object.assign(config, mainData);
+                        
+                        // 加载项目配置
+                        const projectsResponse = await fetch('config.json');
+                        if (!projectsResponse.ok) {
+                            throw new Error('Failed to load projects config.json');
+                        }
+                        const projectsData = await projectsResponse.json();
+                        
+                        // 合并项目配置
+                        Object.assign(config, projectsData);
+                        
+                        // 初始化主题
+                        if (mainData.settings?.defaultTheme) {
+                            themeManager.init(mainData.themes, mainData.settings.defaultTheme);
+                        }
+                        
+                        // 初始化粒子效果
+                        if (mainData.settings?.enableParticles) {
+                            setTimeout(() => themeManager.initParticles(), 100);
+                        }
+                    } catch (error) {
+                        console.error('Error loading config:', error);
+                        // 加载失败时不使用默认数据，确保从config.json加载
+                        
+                        // 使用默认主题
+                        themeManager.init(config.themes, config.settings.defaultTheme);
+                        
+                        // 初始化粒子效果
+                        setTimeout(() => themeManager.initParticles(), 100);
+                    } finally {
+                        loading.value = false;
+                    }
+                };
+                
+                // 滚动动画逻辑
+                const handleScroll = () => {
+                    const elements = document.querySelectorAll('.scroll-reveal');
+                    elements.forEach(element => {
+                        const elementTop = element.getBoundingClientRect().top;
+                        const elementVisible = 150;
+                        if (elementTop < window.innerHeight - elementVisible) {
+                            element.classList.add('active');
+                        }
+                    });
+                };
+                
+                onMounted(() => {
+                    // 加载配置
+                    loadConfig();
+                    
+                    // 初始加载时触发一次滚动动画
+                    handleScroll();
+                    
+                    // 监听滚动事件
+                    window.addEventListener('scroll', handleScroll);
+                });
+                
+                return {
+                    config,
+                    themeManager,
+                    loading
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

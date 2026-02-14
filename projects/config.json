@@ -1,0 +1,73 @@
+{
+  "projects": {
+    "title": "开源项目",
+    "description": "我参与开发的开源项目和个人项目"
+  },
+  "repositories": [
+    {
+      "id": 1,
+      "name": "Personal Homepage",
+      "description": "个人主页项目，使用Vue和Tailwind CSS构建，支持主题切换和音乐播放功能",
+      "language": "JavaScript",
+      "stars": 15,
+      "forks": 5,
+      "openIssues": 2,
+      "createdAt": "2026-01-01",
+      "updatedAt": "2026-02-14",
+      "url": "https://github.com/siciyuan/personal-homepage",
+      "topics": ["vue", "tailwindcss", "personal-website"]
+    },
+    {
+      "id": 2,
+      "name": "Tech Blog System",
+      "description": "技术博客系统，基于Node.js和MongoDB，支持Markdown编辑和主题切换",
+      "language": "JavaScript",
+      "stars": 23,
+      "forks": 8,
+      "openIssues": 3,
+      "createdAt": "2025-12-15",
+      "updatedAt": "2026-02-10",
+      "url": "https://github.com/siciyuan/tech-blog-system",
+      "topics": ["nodejs", "mongodb", "blog"]
+    },
+    {
+      "id": 3,
+      "name": "Data Analysis Tool",
+      "description": "数据分析工具，使用Python和D3.js开发，支持多种数据格式导入和可视化",
+      "language": "Python",
+      "stars": 18,
+      "forks": 6,
+      "openIssues": 1,
+      "createdAt": "2025-11-20",
+      "updatedAt": "2026-02-05",
+      "url": "https://github.com/siciyuan/data-analysis-tool",
+      "topics": ["python", "d3js", "data-analysis"]
+    },
+    {
+      "id": 4,
+      "name": "Flutter App Template",
+      "description": "Flutter移动应用模板，包含常用组件和功能，可快速搭建跨平台应用",
+      "language": "Dart",
+      "stars": 31,
+      "forks": 12,
+      "openIssues": 4,
+      "createdAt": "2025-10-10",
+      "updatedAt": "2026-02-01",
+      "url": "https://github.com/siciyuan/flutter-app-template",
+      "topics": ["flutter", "dart", "mobile-app"]
+    },
+    {
+      "id": 5,
+      "name": "Docker Compose Examples",
+      "description": "Docker Compose示例集合，包含各种常用服务的容器化配置",
+      "language": "YAML",
+      "stars": 27,
+      "forks": 10,
+      "openIssues": 0,
+      "createdAt": "2025-09-05",
+      "updatedAt": "2026-01-20",
+      "url": "https://github.com/siciyuan/docker-compose-examples",
+      "topics": ["docker", "docker-compose", "devops"]
+    }
+  ]
+}
