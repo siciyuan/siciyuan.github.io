@@ -141,7 +141,7 @@
         <footer class="pt-16 pb-24 md:pb-32 text-center opacity-80" v-if="config.footer">
             <div class="container mx-auto px-4 max-w-6xl">
                 <p>{{ config.footer.copyright }}</p>
-                <p class="mt-2">{{ config.footer.extraInfo }}</p>
+                <p class="mt-2" v-html="config.footer.extraInfo"></p>
                 
                 <!-- 页脚链接 -->
                 <div class="flex flex-wrap justify-center gap-6 mt-6" v-if="config.footer.links">
