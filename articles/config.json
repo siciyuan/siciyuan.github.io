@@ -21,7 +21,8 @@
       "date": "2026-02-01",
       "author": "AAA鳞游SCROAM",
       "readCount": 1200,
-      "thumbnail": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "thumbnail": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "url": "#"
     },
     {
       "id": 2,
@@ -33,7 +34,8 @@
       "date": "2026-01-25",
       "author": "AAA鳞游SCROAM",
       "readCount": 950,
-      "thumbnail": "https://images.unsplash.com/photo-1581092198504-cd20c814b762?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "thumbnail": "https://images.unsplash.com/photo-1581092198504-cd20c814b762?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "url": "#"
     },
     {
       "id": 3,
@@ -45,7 +47,8 @@
       "date": "2026-01-20",
       "author": "AAA鳞游SCROAM",
       "readCount": 820,
-      "thumbnail": "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "thumbnail": "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "url": "#"
     },
     {
       "id": 4,
@@ -57,7 +60,8 @@
       "date": "2026-01-15",
       "author": "AAA鳞游SCROAM",
       "readCount": 780,
-      "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "url": "#"
     },
     {
       "id": 5,
@@ -69,7 +73,8 @@
       "date": "2026-01-10",
       "author": "AAA鳞游SCROAM",
       "readCount": 650,
-      "thumbnail": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "thumbnail": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "url": "#"
     }
   ]
 }
