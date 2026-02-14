@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的作品集</title>
+    
+    <!-- CDN 依赖 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+    <!-- 本地资源 -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../logo.ico">
+</head>
+<body class="theme-transition min-h-screen">
+    <div id="app">
+        <!-- 粒子背景容器 -->
+        <div id="particles-bg" class="particles-bg"></div>
+        
+        <!-- 主题选择器 -->
+        <div class="theme-selector" v-if="config.themes">
+            <div class="glass-card rounded-full p-2 flex space-x-2">
+                <button 
+                    v-for="theme in config.themes" 
+                    :key="theme.id"
+                    @click="themeManager.changeTheme(theme.id)"
+                    class="w-6 h-6 rounded-full border-2 border-white/30 focus:outline-none transition-transform hover:scale-110"
+                    :style="{backgroundColor: theme.color}"
+                    :title="theme.name"
+                ></button>
+            </div>
+        </div>
+        
+        <!-- 主内容区域 -->
+        <main class="container mx-auto px-4 py-8 max-w-6xl">
+            <!-- 作品集标题 -->
+            <section class="glass-card rounded-2xl p-8 mb-8 scroll-reveal" v-if="portfolioConfig.portfolio">
+                <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">{{ portfolioConfig.portfolio.title }}</h1>
+                <p class="text-lg text-center opacity-90">{{ portfolioConfig.portfolio.description }}</p>
+            </section>
+            
+            <!-- 作品集项目 -->
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" v-if="portfolioConfig.projects">
+                <div 
+                    v-for="project in portfolioConfig.projects" 
+                    :key="project.id"
+                    class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 scroll-reveal"
+                >
+                    <!-- 项目图片 -->
+                    <div class="mb-4 overflow-hidden rounded-xl">
+                        <img 
+                            :src="project.image" 
+                            :alt="project.title"
+                            class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110"
+                        >
+                    </div>
+                    
+                    <!-- 项目信息 -->
+                    <h2 class="text-xl font-bold mb-2">{{ project.title }}</h2>
+                    <p class="text-sm opacity-90 mb-4">{{ project.description }}</p>
+                    
+                    <!-- 项目分类 -->
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-medium">{{ project.category }}</span>
+                    </div>
+                    
+                    <!-- 技术栈 -->
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span 
+                            v-for="(tech, index) in project.technologies" 
+                            :key="index"
+                            class="px-2 py-1 bg-white/10 rounded text-xs"
+                        >
+                            {{ tech }}
+                        </span>
+                    </div>
+                    
+                    <!-- 项目链接 -->
+                    <div class="flex space-x-3">
+                        <a 
+                            v-if="project.url" 
+                            :href="project.url" 
+                            target="_blank"
+                            class="flex-1 flex items-center justify-center space-x-2 px-4 py-2 rounded-lg glass-card hover:bg-white/20 transition-all duration-300"
+                        >
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>查看项目</span>
+                        </a>
+                        <a 
+                            v-if="project.github" 
+                            :href="project.github" 
+                            target="_blank"
+                            class="flex items-center justify-center w-10 h-10 rounded-lg glass-card hover:bg-white/20 transition-all duration-300"
+                        >
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- 页脚 -->
+        <footer class="pt-16 pb-24 md:pb-32 text-center opacity-80" v-if="config.footer">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <p>{{ config.footer.copyright }}</p>
+                <p class="mt-2">{{ config.footer.extraInfo }}</p>
+                
+                <!-- 页脚链接 -->
+                <div class="flex flex-wrap justify-center gap-6 mt-6" v-if="config.footer.links">
+                    <a 
+                        v-for="link in config.footer.links" 
+                        :key="link.id"
+                        :href="link.url"
+                        class="hover:text-white/100 transition-colors"
+                    >
+                        {{ link.name }}
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- 本地模块 -->
+    <script src="../theme-manager.js"></script>
+    <script src="../script.js"></script>
+    <script>
+        // 加载作品集配置
+        const loadPortfolioConfig = async () => {
+            try {
+                const response = await fetch('config.json');
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('加载作品集配置失败:', error);
+                return {
+                    portfolio: {
+                        title: '我的作品集',
+                        description: '加载配置失败'
+                    },
+                    projects: []
+                };
+            }
+        };
+        
+        // 扩展主应用
+        const app = createApp({
+            setup() {
+                const config = reactive({});
+                const portfolioConfig = reactive({});
+                const themeManager = new ThemeManager();
+                
+                // 加载主配置
+                const loadMainConfig = async () => {
+                    try {
+                        const response = await fetch('../config.json');
+                        const data = await response.json();
+                        Object.assign(config, data);
+                        
+                        // 初始化主题
+                        if (data.settings?.defaultTheme) {
+                            themeManager.init(data.themes, data.settings.defaultTheme);
+                        }
+                        
+                        // 初始化粒子效果
+                        if (data.settings?.enableParticles) {
+                            setTimeout(() => themeManager.initParticles(), 100);
+                        }
+                    } catch (error) {
+                        console.error('加载主配置失败:', error);
+                    }
+                };
+                
+                // 加载作品集配置
+                const loadConfig = async () => {
+                    await loadMainConfig();
+                    const data = await loadPortfolioConfig();
+                    Object.assign(portfolioConfig, data);
+                };
+                
+                onMounted(() => {
+                    loadConfig();
+                    
+                    // 滚动动画逻辑
+                    const handleScroll = () => {
+                        const elements = document.querySelectorAll('.scroll-reveal');
+                        elements.forEach(element => {
+                            const elementTop = element.getBoundingClientRect().top;
+                            const elementVisible = 150;
+                            if (elementTop < window.innerHeight - elementVisible) {
+                                element.classList.add('active');
+                            }
+                        });
+                    };
+                    
+                    window.addEventListener('scroll', handleScroll);
+                    // 初始加载时触发一次
+                    handleScroll();
+                });
+                
+                return {
+                    config,
+                    portfolioConfig,
+                    themeManager
+                };
+            }
+        });
+        
+        app.mount('#app');
+    </script>
+</body>
+</html>

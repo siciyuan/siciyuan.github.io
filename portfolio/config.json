@@ -1,0 +1,48 @@
+{
+  "portfolio": {
+    "title": "我的作品集",
+    "description": "展示我的项目作品和技术成果"
+  },
+  "projects": [
+    {
+      "id": 1,
+      "title": "个人主页",
+      "description": "使用Vue和Tailwind CSS构建的个人主页，支持主题切换和音乐播放功能",
+      "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "category": "Web开发",
+      "technologies": ["Vue", "Tailwind CSS", "JavaScript"],
+      "url": "#",
+      "github": "https://github.com/siciyuan"
+    },
+    {
+      "id": 2,
+      "title": "技术博客系统",
+      "description": "基于Node.js和MongoDB的个人技术博客系统，支持Markdown编辑和主题切换",
+      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "category": "全栈开发",
+      "technologies": ["Node.js", "MongoDB", "Express"],
+      "url": "#",
+      "github": "https://github.com/siciyuan"
+    },
+    {
+      "id": 3,
+      "title": "数据分析工具",
+      "description": "使用Python和D3.js开发的数据分析和可视化工具，支持多种数据格式导入",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "category": "数据科学",
+      "technologies": ["Python", "D3.js", "Pandas"],
+      "url": "#",
+      "github": "https://github.com/siciyuan"
+    },
+    {
+      "id": 4,
+      "title": "移动应用原型",
+      "description": "使用Figma设计的移动应用原型，包含用户界面和交互设计",
+      "image": "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "category": "UI/UX设计",
+      "technologies": ["Figma", "UI设计", "UX设计"],
+      "url": "#",
+      "github": "https://github.com/siciyuan"
+    }
+  ]
+}
