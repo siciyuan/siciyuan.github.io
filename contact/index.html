@@ -350,15 +350,24 @@
                         try {
                             console.log('Attempting to submit form to:', apiUrl);
                             
-                            // 提交表单数据到API
-                            const response = await fetch(apiUrl, {
-                                method: 'POST',
+                            // 构建GET请求URL，使用查询参数传递数据
+                            const params = new URLSearchParams();
+                            params.append('name', formData.name);
+                            params.append('email', formData.email);
+                            params.append('subject', formData.subject);
+                            params.append('message', formData.message);
+                            
+                            const requestUrl = apiUrl + '?' + params.toString();
+                            console.log('Request URL:', requestUrl);
+                            
+                            // 提交表单数据到API（使用GET请求）
+                            const response = await fetch(requestUrl, {
+                                method: 'GET',
                                 mode: 'cors',
                                 credentials: 'omit',
                                 headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(formData)
+                                    'Accept': 'application/json'
+                                }
                             });
                             
                             console.log('Response status:', response.status);
