@@ -30,9 +30,9 @@
   
   "quickLinks": [
     { "id": 1, "name": "我的作品集", "url": "portfolio/" },
-    { "id": 2, "name": "技术文章", "url": "#" },
-    { "id": 3, "name": "开源项目", "url": "#" },
-    { "id": 4, "name": "联系我", "url": "#" }
+    { "id": 2, "name": "技术文章", "url": "articles/" },
+    { "id": 3, "name": "开源项目", "url": "projects/" },
+    { "id": 4, "name": "联系我", "url": "contact/" }
   ],
   
   "playlist": [
@@ -55,7 +55,7 @@
   
   "footer": {
         "copyright": "© 2026 鳞游. 保留所有权利.",
-        "extraInfo": "由Vue与Tailwind CSS 构建 | 本页面后端由 <a href='https://www.xiaojiyun.com/aff/WPNPVVXD' target='_blank'>小鸡云</a> 提供 | 碎碎念:免费mc服务器 <a href='https://www.rainyun.com/NjI2MTY1_' target='_blank'>点击查看</a>",
+        "extraInfo": "由Vue与Tailwind CSS 构建 | 本页面后端由 <a href='https://www.xiaojiyun.com/aff/WPNPVVXD' target='_blank'>小鸡云</a> 提供 | 我日常玩的免费mc服务器就在这开的 <a href='https://www.xiaojiyun.com/aff/WPNPVVXD' target='_blank'>点击查看</a>",
         "links": [
             { "id": 1, "name": "隐私政策", "url": "#" },
             { "id": 2, "name": "使用条款", "url": "#" },
