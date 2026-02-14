@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我</title>
+    
+    <!-- CDN 依赖 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+    <!-- 本地资源 -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../logo.ico">
+</head>
+<body class="theme-transition min-h-screen">
+    <div id="app">
+        <!-- 粒子背景容器 -->
+        <div id="particles-bg" class="particles-bg"></div>
+        
+        <!-- 主题选择器 -->
+        <div class="theme-selector" v-if="config.themes">
+            <div class="glass-card rounded-full p-2 flex space-x-2">
+                <button 
+                    v-for="theme in config.themes" 
+                    :key="theme.id"
+                    @click="themeManager.changeTheme(theme.id)"
+                    class="w-6 h-6 rounded-full border-2 border-white/30 focus:outline-none transition-transform hover:scale-110"
+                    :style="{backgroundColor: theme.color}"
+                    :title="theme.name"
+                ></button>
+            </div>
+        </div>
+        
+        <!-- 主内容区域 -->
+        <main class="container mx-auto px-4 py-8 max-w-6xl">
+            <!-- 联系标题 -->
+            <section class="glass-card rounded-2xl p-8 mb-8 scroll-reveal" v-if="config.contact">
+                <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">{{ config.contact.title }}</h1>
+                <p class="text-lg text-center opacity-90">{{ config.contact.description }}</p>
+            </section>
+            
+            <!-- 联系信息和表单 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <!-- 联系信息 -->
+                <section class="glass-card rounded-2xl p-6 scroll-reveal">
+                    <h2 class="text-2xl font-bold mb-6">联系信息</h2>
+                    
+                    <!-- 邮箱 -->
+                    <div class="flex items-start mb-6">
+                        <div class="mr-4 mt-1">
+                            <i class="fas fa-envelope text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">邮箱</h3>
+                            <p class="opacity-90">{{ config.info.email }}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 电话 -->
+                    <div class="flex items-start mb-6">
+                        <div class="mr-4 mt-1">
+                            <i class="fas fa-phone-alt text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">电话</h3>
+                            <p class="opacity-90">{{ config.info.phone }}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 地址 -->
+                    <div class="flex items-start mb-6">
+                        <div class="mr-4 mt-1">
+                            <i class="fas fa-map-marker-alt text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">地址</h3>
+                            <p class="opacity-90">{{ config.info.address }}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 社交媒体 -->
+                    <div class="mt-8">
+                        <h3 class="font-semibold mb-4">社交媒体</h3>
+                        <div class="flex space-x-4">
+                            <a 
+                                v-for="social in config.info.social" 
+                                :key="social.name"
+                                :href="social.url"
+                                target="_blank"
+                                class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-white/20 transition-all duration-300"
+                                :title="social.name"
+                            >
+                                <i :class="social.icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 联系表单 -->
+                <section class="glass-card rounded-2xl p-6 scroll-reveal">
+                    <h2 class="text-2xl font-bold mb-6">发送消息</h2>
+                    
+                    <form @submit.prevent="submitForm">
+                        <!-- 姓名 -->
+                        <div class="mb-4">
+                            <label :for="'name'" class="block mb-2">{{ config.contact.form.name.label }}</label>
+                            <input 
+                                type="text" 
+                                :id="'name'"
+                                v-model="formData.name"
+                                :placeholder="config.contact.form.name.placeholder"
+                                :required="config.contact.form.name.required"
+                                class="w-full px-4 py-2 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-white/30"
+                            >
+                        </div>
+                        
+                        <!-- 邮箱 -->
+                        <div class="mb-4">
+                            <label :for="'email'" class="block mb-2">{{ config.contact.form.email.label }}</label>
+                            <input 
+                                type="email" 
+                                :id="'email'"
+                                v-model="formData.email"
+                                :placeholder="config.contact.form.email.placeholder"
+                                :required="config.contact.form.email.required"
+                                class="w-full px-4 py-2 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-white/30"
+                            >
+                        </div>
+                        
+                        <!-- 主题 -->
+                        <div class="mb-4">
+                            <label :for="'subject'" class="block mb-2">{{ config.contact.form.subject.label }}</label>
+                            <input 
+                                type="text" 
+                                :id="'subject'"
+                                v-model="formData.subject"
+                                :placeholder="config.contact.form.subject.placeholder"
+                                :required="config.contact.form.subject.required"
+                                class="w-full px-4 py-2 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-white/30"
+                            >
+                        </div>
+                        
+                        <!-- 消息 -->
+                        <div class="mb-6">
+                            <label :for="'message'" class="block mb-2">{{ config.contact.form.message.label }}</label>
+                            <textarea 
+                                :id="'message'"
+                                v-model="formData.message"
+                                :placeholder="config.contact.form.message.placeholder"
+                                :required="config.contact.form.message.required"
+                                rows="4"
+                                class="w-full px-4 py-2 rounded-lg glass-card focus:outline-none focus:ring-2 focus:ring-white/30"
+                            ></textarea>
+                        </div>
+                        
+                        <!-- 提交按钮 -->
+                        <button 
+                            type="submit" 
+                            class="w-full py-2 rounded-lg glass-card hover:bg-white/20 transition-all duration-300"
+                        >
+                            {{ config.contact.form.submit.label }}
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </main>
+        
+        <!-- 页脚 -->
+        <footer class="pt-16 pb-24 md:pb-32 text-center opacity-80" v-if="config.footer">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <p>{{ config.footer.copyright }}</p>
+                <p class="mt-2" v-html="config.footer.extraInfo"></p>
+                
+                <!-- 页脚链接 -->
+                <div class="flex flex-wrap justify-center gap-6 mt-6" v-if="config.footer.links">
+                    <a 
+                        v-for="link in config.footer.links" 
+                        :key="link.id"
+                        :href="link.url"
+                        class="hover:text-white/100 transition-colors"
+                    >
+                        {{ link.name }}
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
+今日总访问量 <span id="busuanzi_today_pv">加载中...</span> 次
+今日总访客数 <span id="busuanzi_today_uv">加载中...</span> 人
+本站总访问量 <span id="busuanzi_site_pv">加载中...</span> 次
+本站总访客数 <span id="busuanzi_site_uv">加载中...</span> 人
+本页总阅读量 <span id="busuanzi_page_pv">加载中...</span> 次
+本页总访客数 <span id="busuanzi_page_uv">加载中...</span> 人
+    <!-- 本地模块 -->
+    <script src="../theme-manager.js"></script>
+    <script src="../effects.js"></script>
+    <script>
+        // 创建联系我Vue应用
+        const { createApp, onMounted, reactive, ref } = Vue;
+        
+        createApp({
+            setup() {
+                const config = reactive({
+                    contact: {
+                        title: "联系我",
+                        description: "如果您有任何问题或合作意向，欢迎随时联系我",
+                        form: {
+                            name: {
+                                label: "姓名",
+                                placeholder: "请输入您的姓名",
+                                required: true
+                            },
+                            email: {
+                                label: "邮箱",
+                                placeholder: "请输入您的邮箱",
+                                required: true
+                            },
+                            subject: {
+                                label: "主题",
+                                placeholder: "请输入消息主题",
+                                required: true
+                            },
+                            message: {
+                                label: "消息",
+                                placeholder: "请输入您的消息",
+                                required: true
+                            },
+                            submit: {
+                                label: "发送消息"
+                            }
+                        }
+                    },
+                    info: {
+                        email: "siciyuan@example.com",
+                        phone: "+86 123 4567 8910",
+                        address: "北京市海淀区",
+                        social: []
+                    },
+                    themes: [
+                        { "id": "light", "name": "亮白", "color": "#f8fafc", "bg": "#f1f5f9", "text": "#475569" },
+                        { "id": "graphite", "name": "石墨黑", "color": "#64748b", "bg": "#1e293b", "text": "#e2e8f0" },
+                        { "id": "lime", "name": "青柠", "color": "#a3e635", "bg": "#fefce8", "text": "#4d7c0f" },
+                        { "id": "lemon", "name": "柠黄", "color": "#fde68a", "bg": "#fffbeb", "text": "#a16207" },
+                        { "id": "apple", "name": "苹果绿", "color": "#4ade80", "bg": "#f0fdf4", "text": "#166534" },
+                        { "id": "water", "name": "水蓝", "color": "#60a5fa", "bg": "#eff6ff", "text": "#1e40af" },
+                        { "id": "cherry", "name": "樱红", "color": "#fda4af", "bg": "#fef2f2", "text": "#9f1239" },
+                        { "id": "lavender", "name": "薰衣草紫", "color": "#c4b5fd", "bg": "#faf5ff", "text": "#6b21a8" }
+                    ],
+                    settings: {
+                        defaultTheme: "water",
+                        enableParticles: true
+                    },
+                    footer: {
+                        copyright: "© 2026 鳞游. 保留所有权利.",
+                        extraInfo: "由Vue与Tailwind CSS 构建 | 本页面后端由 <a href='https://www.xiaojiyun.com/aff/WPNPVVXD' target='_blank'>小鸡云</a> 提供 | 我日常玩的免费mc服务器就在这开的 <a href='https://www.xiaojiyun.com/aff/WPNPVVXD' target='_blank'>点击查看</a>",
+                        links: [
+                            { "id": 1, "name": "隐私政策", "url": "#" },
+                            { "id": 2, "name": "使用条款", "url": "#" },
+                            { "id": 3, "name": "站点地图", "url": "#" },
+                            { "id": 4, "name": "友情链接", "url": "#" }
+                        ]
+                    }
+                });
+                
+                const themeManager = new ThemeManager();
+                const formData = reactive({
+                    name: '',
+                    email: '',
+                    subject: '',
+                    message: ''
+                });
+                const formSubmitted = ref(false);
+                const loading = ref(true);
+                
+                // 加载配置文件
+                const loadConfig = async () => {
+                    try {
+                        // 加载主页面配置
+                        const mainResponse = await fetch('../config.json');
+                        if (!mainResponse.ok) {
+                            throw new Error('Failed to load main config.json');
+                        }
+                        const mainData = await mainResponse.json();
+                        
+                        // 合并主配置
+                        Object.assign(config, mainData);
+                        
+                        // 加载联系配置
+                        const contactResponse = await fetch('config.json');
+                        if (!contactResponse.ok) {
+                            throw new Error('Failed to load contact config.json');
+                        }
+                        const contactData = await contactResponse.json();
+                        
+                        // 合并联系配置
+                        Object.assign(config, contactData);
+                        
+                        // 初始化主题
+                        if (mainData.settings?.defaultTheme) {
+                            themeManager.init(mainData.themes, mainData.settings.defaultTheme);
+                        }
+                        
+                        // 初始化粒子效果
+                        if (mainData.settings?.enableParticles) {
+                            setTimeout(() => themeManager.initParticles(), 100);
+                        }
+                    } catch (error) {
+                        console.error('Error loading config:', error);
+                        // 加载失败时不使用默认数据，确保从config.json加载
+                        
+                        // 使用默认主题
+                        themeManager.init(config.themes, config.settings.defaultTheme);
+                        
+                        // 初始化粒子效果
+                        setTimeout(() => themeManager.initParticles(), 100);
+                    } finally {
+                        loading.value = false;
+                    }
+                };
+                
+                // 提交表单
+                const submitForm = () => {
+                    // 这里可以添加表单验证和提交逻辑
+                    console.log('表单数据:', formData);
+                    formSubmitted.value = true;
+                    
+                    // 重置表单
+                    setTimeout(() => {
+                        formData.name = '';
+                        formData.email = '';
+                        formData.subject = '';
+                        formData.message = '';
+                        formSubmitted.value = false;
+                    }, 3000);
+                };
+                
+                // 滚动动画逻辑
+                const handleScroll = () => {
+                    const elements = document.querySelectorAll('.scroll-reveal');
+                    elements.forEach(element => {
+                        const elementTop = element.getBoundingClientRect().top;
+                        const elementVisible = 150;
+                        if (elementTop < window.innerHeight - elementVisible) {
+                            element.classList.add('active');
+                        }
+                    });
+                };
+                
+                onMounted(() => {
+                    // 加载配置
+                    loadConfig();
+                    
+                    // 初始加载时触发一次滚动动画
+                    handleScroll();
+                    
+                    // 监听滚动事件
+                    window.addEventListener('scroll', handleScroll);
+                });
+                
+                return {
+                    config,
+                    themeManager,
+                    formData,
+                    formSubmitted,
+                    submitForm,
+                    loading
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
