@@ -7,14 +7,14 @@
       "id": 1,
       "name": "个人主页 Vue3",
       "lang": "Vue 3",
-      "status": "维护中",
+      "status": "大约已完成了┗|｀O′|┛ 嗷~~",
       "desc": "基于 Vue 3 + TypeScript 构建的现代化个人主页",
       "icon": "fas fa-home",
       "tags": ["Vue 3", "TypeScript", "Tailwind"],
       "stars": 12,
       "forks": 3,
       "links": [
-        { "text": "GitHub", "url": "https://github.com/siciyuan/personal-website", "icon": "fab fa-github" },
+        { "text": "GitHub", "url": "https://github.com/siciyuan/siciyuan.github.io", "icon": "fab fa-github" },
         { "text": "演示", "url": "https://world123.top", "icon": "fas fa-external-link-alt" }
       ]
     },
