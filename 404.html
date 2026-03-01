@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>页面未找到</title>
+  <link href="https://fastly.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style id="dynamic-style">
+    /* 动态样式将在这里插入 */
+  </style>
+</head>
+<body>
+  <div id="container" class="container">
+    <!-- 页面内容将由JavaScript动态生成 -->
+  </div>
+
+  <script>
+    // 定义不同的404页面风格
+    const styles = [
+      {
+        name: "极简风格",
+        css: `
+          body { background-color: #f8f9fa; font-family: 'Helvetica Neue', Arial, sans-serif; }
+          .container { max-width: 800px; margin: 0 auto; padding: 2rem; text-align: center; }
+          .error-code { font-size: 8rem; font-weight: 300; color: #e9ecef; line-height: 1; margin-bottom: 1rem; }
+          .error-message { font-size: 1.5rem; color: #495057; margin-bottom: 2rem; }
+          .btn { display: inline-block; padding: 0.75rem 1.5rem; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; transition: background-color 0.2s; }
+          .btn:hover { background-color: #0056b3; }
+        `,
+        html: `
+          <div class="error-code">404</div>
+          <div class="error-message">抱歉，您访问的页面不存在。</div>
+          <a href="/" class="btn"><i class="fas fa-arrow-left mr-2"></i>返回首页</a>
+        `
+      },
+      {
+        name: "科技风格",
+        css: `
+          body { background-color: #0f0f1a; color: #00ffcc; font-family: 'Courier New', monospace; overflow: hidden; }
+          .matrix-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.2; }
+          .container { max-width: 800px; margin: 0 auto; padding: 2rem; text-align: center; position: relative; z-index: 1; }
+          .error-code { font-size: 6rem; font-weight: bold; text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; margin-bottom: 1rem; animation: pulse 2s infinite; }
+          .error-message { font-size: 1.2rem; margin-bottom: 2rem; letter-spacing: 2px; }
+          .btn { display: inline-block; padding: 0.75rem 1.5rem; background-color: transparent; color: #00ffcc; border: 1px solid #00ffcc; text-decoration: none; border-radius: 4px; transition: all 0.3s; font-family: 'Courier New', monospace; }
+          .btn:hover { background-color: rgba(0, 255, 204, 0.1); box-shadow: 0 0 10px #00ffcc; }
+          @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
+          .terminal-line { text-align: left; margin: 1rem 0; padding: 0.5rem; background: rgba(0, 0, 0, 0.3); border-left: 3px solid #00ffcc; }
+        `,
+        html: `
+          <canvas class="matrix-bg" id="matrixCanvas"></canvas>
+          <div class="error-code">404</div>
+          <div class="error-message">SYSTEM ERROR: PAGE NOT FOUND</div>
+          
+          <div class="terminal-line">
+            <span class="text-red-400">ERROR</span>: The requested resource could not be located
+          </div>
+          <div class="terminal-line">
+            <span class="text-yellow-400">STATUS</span>: 404 - Resource Unavailable
+          </div>
+          <div class="terminal-line">
+            <span class="text-green-400">SOLUTION</span>: Return to main system interface
+          </div>
+          
+          <a href="/" class="btn"><i class="fas fa-home mr-2"></i>BACK TO MAIN SYSTEM</a>
+        `,
+        script: `
+          // Matrix background effect
+          const canvas = document.getElementById('matrixCanvas');
+          const ctx = canvas.getContext('2d');
+          
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          
+          const chars = '01';
+          const fontSize = 14;
+          const columns = canvas.width / fontSize;
+          const drops = [];
+          
+          for(let i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * canvas.height / fontSize);
+          }
+          
+          function draw() {
+            ctx.fillStyle = 'rgba(15, 15, 26, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ffcc';
+            ctx.font = \`\${fontSize}px monospace\`;
+            
+            for(let i = 0; i < drops.length; i++) {
+              const text = chars[Math.floor(Math.random() * chars.length)];
+              ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+              
+              if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+              }
+              
+              drops[i]++;
+            }
+          }
+          
+          setInterval(draw, 33);
+          
+          window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+          });
+        `
+      },
+      {
+        name: "手绘风格",
+        css: `
+          body { background-color: #fff8e1; font-family: 'Comic Sans MS', '幼圆', cursive; overflow-x: hidden; }
+          .container { max-width: 800px; margin: 0 auto; padding: 2rem; text-align: center; }
+          .error-code { font-size: 8rem; font-weight: bold; color: #ff6b6b; text-shadow: 3px 3px 0 #ffd166, 6px 6px 0 rgba(0, 0, 0, 0.1); margin: 2rem 0; transform: rotate(-5deg); }
+          .error-message { font-size: 2rem; color: #4a4a4a; margin-bottom: 2rem; position: relative; display: inline-block; }
+          .error-message::after { content: ""; position: absolute; bottom: -10px; left: 0; width: 100%; height: 5px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 4"><path d="M0,2 Q5,0 10,2 T20,2" stroke="%23ff6b6b" fill="none" stroke-width="1"/></svg>'); background-repeat: repeat-x; }
+          .btn { display: inline-block; padding: 1rem 2rem; background-color: #ffd166; color: #4a4a4a; text-decoration: none; border-radius: 50px; border: 3px solid #ff6b6b; font-weight: bold; font-size: 1.2rem; transition: all 0.3s; box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1); margin-top: 1rem; }
+          .btn:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15); }
+          .btn:active { transform: translate(0, 0); box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1); }
+          .doodle { font-size: 5rem; margin: 1rem 0; animation: bounce 2s infinite; }
+          @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+          .cloud { position: absolute; font-size: 4rem; opacity: 0.3; z-index: -1; animation: float 15s infinite linear; }
+          @keyframes float { 0% { transform: translateX(-100px); } 100% { transform: translateX(calc(100vw + 100px)); } }
+        `,
+        html: `
+          <div class="cloud" style="top: 10%; left: -100px; animation-duration: 20s;">☁</div>
+          <div class="cloud" style="top: 30%; left: -100px; animation-duration: 25s; animation-delay: 5s;">☁</div>
+          <div class="cloud" style="top: 60%; left: -100px; animation-duration: 30s; animation-delay: 10s;">☁</div>
+          
+          <div class="container">
+            <div class="doodle">😢</div>
+            <div class="error-code">404</div>
+            <div class="error-message">哎呀，页面走丢了！</div>
+            <p class="text-xl mb-8">别担心，这种情况经常发生...</p>
+            <a href="/" class="btn"><i class="fas fa-home mr-2"></i>带我回家</a>
+          </div>
+        `,
+        script: `
+          // Add some doodles randomly
+          const doodles = ['🤪', '😅', '🤔', '😵', '🙃', '🧐'];
+          const container = document.querySelector('.container');
+          
+          for(let i = 0; i < 8; i++) {
+            const doodle = document.createElement('div');
+            doodle.className = 'doodle absolute text-2xl';
+            doodle.textContent = doodles[Math.floor(Math.random() * doodles.length)];
+            doodle.style.left = Math.random() * 100 + '%';
+            doodle.style.top = Math.random() * 100 + '%';
+            doodle.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+            doodle.style.animationDelay = Math.random() * 2 + 's';
+            container.appendChild(doodle);
+          }
+        `
+      }
+    ];
+
+    // 随机选择一种风格
+    const randomStyle = styles[Math.floor(Math.random() * styles.length)];
+    
+    // 应用CSS样式
+    document.getElementById('dynamic-style').textContent = randomStyle.css;
+    
+    // 插入HTML内容
+    document.getElementById('container').innerHTML = randomStyle.html;
+    
+    // 如果有脚本，执行它
+    if (randomStyle.script) {
+      eval(randomStyle.script);
+    }
+  </script>
+</body>
+</html>
