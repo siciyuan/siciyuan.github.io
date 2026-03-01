@@ -1,0 +1,29 @@
+{
+  "title": "联系我",
+  "description": "有任何问题或建议，欢迎与我联系",
+  "email": "admin@world123.top",
+  "qq": "1493216423",
+  "location": "中国 · 互联网",
+  "social": [
+    {
+      "name": "GitHub",
+      "icon": "fab fa-github",
+      "url": "https://github.com/siciyuan"
+    },
+    {
+      "name": "Gitee",
+      "icon": "fab fa-git-alt",
+      "url": "https://gitee.com/scroam"
+    },
+    {
+      "name": "B站",
+      "icon": "fas fa-tv",
+      "url": "https://space.bilibili.com/385463410"
+    },
+    {
+      "name": "CCW",
+      "icon": "fas fa-code",
+      "url": "https://www.ccw.site/student/65cf41ca4b42321bf8da5ece"
+    }
+  ]
+}

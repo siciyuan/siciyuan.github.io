@@ -1,0 +1,51 @@
+{
+  "title": "开源项目",
+  "description": "我参与的开源项目，欢迎 Star 和 Fork",
+  "github": "https://github.com/siciyuan",
+  "items": [
+    {
+      "id": 1,
+      "name": "个人主页 Vue3",
+      "lang": "Vue 3",
+      "status": "维护中",
+      "desc": "基于 Vue 3 + TypeScript 构建的现代化个人主页",
+      "icon": "fas fa-home",
+      "tags": ["Vue 3", "TypeScript", "Tailwind"],
+      "stars": 12,
+      "forks": 3,
+      "links": [
+        { "text": "GitHub", "url": "https://github.com/siciyuan/personal-website", "icon": "fab fa-github" },
+        { "text": "演示", "url": "https://world123.top", "icon": "fas fa-external-link-alt" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "工具箱集合",
+      "lang": "JavaScript",
+      "status": "已完成",
+      "desc": "前端工具集合，包含 JSON 格式化、Base64 编解码等",
+      "icon": "fas fa-toolbox",
+      "tags": ["JavaScript", "工具"],
+      "stars": 8,
+      "forks": 2,
+      "links": [
+        { "text": "GitHub", "url": "https://github.com/siciyuan/web-tools", "icon": "fab fa-github" },
+        { "text": "演示", "url": "https://tools.world123.top", "icon": "fas fa-external-link-alt" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Vue 组件库",
+      "lang": "Vue 3",
+      "status": "开发中",
+      "desc": "轻量级 Vue 3 组件库，支持按需引入",
+      "icon": "fas fa-cubes",
+      "tags": ["Vue 3", "组件库"],
+      "stars": 5,
+      "forks": 1,
+      "links": [
+        { "text": "GitHub", "url": "https://github.com/siciyuan/vue-ui-kit", "icon": "fab fa-github" }
+      ]
+    }
+  ]
+}

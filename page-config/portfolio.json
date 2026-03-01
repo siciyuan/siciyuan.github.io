@@ -1,0 +1,37 @@
+{
+  "title": "我的作品集",
+  "description": "展示我的项目作品和技术成果",
+  "items": [
+    {
+      "id": 1,
+      "title": "个人主页 v2.0",
+      "category": "网站开发",
+      "desc": "基于Vue 3 + TypeScript重构的现代化个人主页",
+      "img": "https://picsum.photos/800/450?random=1",
+      "tags": ["Vue 3", "TypeScript", "Tailwind"],
+      "links": [
+        { "text": "查看", "url": "https://world123.top", "icon": "fas fa-external-link-alt" },
+        { "text": "代码", "url": "https://github.com/siciyuan/personal-website", "icon": "fab fa-github" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "在线工具箱",
+      "category": "Web应用",
+      "desc": "实用的前端工具集合",
+      "tags": ["JavaScript", "工具"],
+      "links": [
+        { "text": "查看", "url": "https://tools.world123.top", "icon": "fas fa-external-link-alt" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "任务管理App",
+      "category": "应用程序",
+      "desc": "简洁高效的任务管理应用",
+      "links": [
+        { "text": "代码", "url": "https://github.com/siciyuan/task-manager", "icon": "fab fa-github" }
+      ]
+    }
+  ]
+}
