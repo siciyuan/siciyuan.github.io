@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="description" content="鳞游の小窝 - 专业全栈开发者的个人技术博客与作品集，分享Web开发、Vue.js、Node.js等技术心得，展示开源项目和前端开发作品" />
+    <meta name="keywords" content="鳞游, 全栈开发者, 个人主页, 技术博客, Web开发, Vue.js, Node.js, 前端开发, 开源项目, 作品集" />
+    <meta name="author" content="鳞游" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#60a5fa" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="google-site-verification" content="" />
+    <meta name="bing-site-verification" content="" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="鳞游の小窝" />
+    
+    <!-- Performance: Early Hints & Resource Hints -->
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    <link rel="dns-prefetch" href="https://cdn.busuanzi.cc" />
+    <link rel="dns-prefetch" href="https://fastly.jsdelivr.net" />
+    <link rel="dns-prefetch" href="https://picsum.photos" />
+    
+    <!-- Preconnect to critical origins -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin />
+    
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="https://picsum.photos/800/450?random=1" imagesrcset="https://picsum.photos/400/225?random=1 400w, https://picsum.photos/800/450?random=1 800w" imagesizes="(max-width: 768px) 100vw, 50vw" />
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="./font.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./logo.ico" as="image" type="image/x-icon" />
+    
+    <!-- Prefetch non-critical resources -->
+    <link rel="prefetch" href="https://fastly.jsdelivr.net/particles.js/2.0.0/particles.min.js" as="script" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="鳞游の小窝 - 全栈开发者的技术博客与作品集" />
+    <meta property="og:description" content="专业全栈开发者的个人技术博客与作品集，分享Web开发、Vue.js、Node.js等技术心得，展示开源项目和前端开发作品" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://world123.top" />
+    <meta property="og:image" content="https://m.ccw.site/user_projects_assets/b69b283d-c243-492c-a2d3-2b84e4275605.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="鳞游の小窝" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="鳞游の小窝 - 全栈开发者的技术博客与作品集" />
+    <meta name="twitter:description" content="专业全栈开发者的个人技术博客与作品集，分享Web开发、Vue.js、Node.js等技术心得，展示开源项目和前端开发作品" />
+    <meta name="twitter:image" content="https://m.ccw.site/user_projects_assets/b69b283d-c243-492c-a2d3-2b84e4275605.jpg" />
+    <meta name="twitter:site" content="@鳞游" />
+    <meta name="twitter:creator" content="@鳞游" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./logo.ico" />
+    <link rel="apple-touch-icon" href="./logo.ico" />
+    <link rel="mask-icon" href="./logo.ico" color="#60a5fa" />
+    
+    <title>鳞游の小窝 - 全栈开发者的技术博客与作品集</title>
+    
+    <!-- Critical CSS - Inline for Performance -->
+    <style>
+      /* Prevent FOUC and layout shift */
+      html {
+        visibility: hidden;
+        opacity: 0;
+      }
+      html.loaded {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+      
+      /* Loading spinner - Critical */
+      #app-loading {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        z-index: 9999;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      #app-loading.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(96, 165, 250, 0.3);
+        border-top-color: #60a5fa;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      /* Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+        .spinner {
+          animation: none;
+          border-top-color: #60a5fa;
+        }
+      }
+      
+      /* Prevent layout shift for images */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+    
+    <!-- Font Awesome - Async Load with media query trick -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
+    
+    <!-- SEO: Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "鳞游",
+      "alternateName": "AAA鳞游SCROAM",
+      "url": "/",
+      "image": "https://m.ccw.site/user_projects_assets/b69b283d-c243-492c-a2d3-2b84e4275605.jpg",
+      "description": "专业全栈开发者，专注于Web开发和用户体验设计，热爱探索新技术，分享知识，参与开源项目",
+      "jobTitle": "全栈开发者",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "自由职业"
+      },
+      "knowsAbout": ["Web开发", "Vue.js", "Node.js", "TypeScript", "Tailwind CSS", "前端开发", "后端开发", "开源"],
+      "sameAs": [
+        "https://github.com/siciyuan",
+        "https://gitee.com/scroam",
+        "https://space.bilibili.com/385463410",
+        "https://www.ccw.site/student/65cf41ca4b42321bf8da5ece"
+      ],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "中国"
+      }
+    }
+    </script>
+    
+    <!-- SEO: Website Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "鳞游の小窝",
+      "url": "/",
+      "description": "专业全栈开发者的个人技术博客与作品集，分享Web开发、Vue.js、Node.js等技术心得，展示开源项目和前端开发作品",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": "zh-CN",
+      "dateCreated": "2026-01-01",
+      "dateModified": "2026-03-01"
+    }
+    </script>
+    
+    <!-- SEO: Blog Post Collection -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "鳞游の技术博客",
+      "description": "分享Web开发、Vue.js、Node.js等技术心得和学习笔记",
+      "url": "/articles",
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "Vue 3 组合式 API 最佳实践",
+          "datePublished": "2024-01-15",
+          "dateModified": "2024-01-15",
+          "description": "深入探讨 Vue 3 Composition API 的使用技巧",
+          "url": "/articles/vue3-composition-api"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "前端性能优化实战指南",
+          "datePublished": "2024-01-10",
+          "dateModified": "2024-01-10",
+          "description": "从实际项目出发，分享前端性能优化技巧",
+          "url": "/articles/frontend-performance"
+        }
+      ]
+    }
+    </script>
+    <script type="module" crossorigin src="./assets/js/index-Bg7jvvCo.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/js/vue-vendor-CjrtIv8-.js">
+    <link rel="stylesheet" crossorigin href="./assets/css/index-CQLIuKUu.css">
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="app-loading">
+      <div class="spinner"></div>
+    </div>
+    
+    <div id="app"></div>
+    
+    
+    <!-- Busuanzi Statistics -->
+    <script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
+  </body>
+</html>

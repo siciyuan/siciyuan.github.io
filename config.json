@@ -1,0 +1,300 @@
+{
+    "site": {
+        "title": "鳞游の小窝",
+        "favicon": "logo.ico"
+    },
+    "profile": {
+        "name": "AAA鳞游SCROAM",
+        "avatar": "https://m.ccw.site/user_projects_assets/b69b283d-c243-492c-a2d3-2b84e4275605.jpg?x-oss-process=image%2Fresize%2Cs_150%2Fformat%2Cwebp",
+        "bio": "\u2000\u2001\u2002\u2003\u2004\u2005\u2006全栈开发者 | 开源爱好者 | 技术博客作者",
+        "about": "我是一名热爱技术的全栈开发者，专注于Web开发和用户体验设计。喜欢探索新技术，分享知识，参与开源项目。我相信技术可以改变世界，让生活变得更美好."
+    },
+    "contacts": [
+        {
+            "id": 1,
+            "name": "GitHub",
+            "icon": "fab fa-github",
+            "iconType": "fontawesome",
+            "url": "https://github.com/siciyuan"
+        },
+        {
+            "id": 2,
+            "name": "GITEE",
+            "icon": "https://gitee.com/favicon.ico",
+            "iconType": "image",
+            "url": "https://gitee.com/scroam"
+        },
+        {
+            "id": 3,
+            "name": "Email",
+            "icon": "fas fa-envelope",
+            "iconType": "fontawesome",
+            "url": "mailto:admin@world123.top"
+        },
+        {
+            "id": 4,
+            "name": "CCW",
+            "icon": "https://m.ccw.site/community/images/logo-ccw.png",
+            "iconType": "image",
+            "url": "https://www.ccw.site/student/65cf41ca4b42321bf8da5ece"
+        },
+        {
+            "id": 5,
+            "name": "BILIBILI",
+            "icon": "https://www.bilibili.com/favicon.ico",
+            "iconType": "image",
+            "url": "https://space.bilibili.com/385463410"
+        },
+        {
+            "id": 6,
+            "name": "QQ",
+            "icon": "fab fa-qq",
+            "iconType": "fontawesome",
+            "url": "tencent://message/?uin=1493216423&Site=&Menu=yes"
+        }
+    ],
+    "friendLinks": [
+        {
+            "id": 1,
+            "name": "Alice的技术博客",
+            "description": "前端开发",
+            "icon": "fab fa-react",
+            "iconType": "fontawesome",
+            "url": "https://example.com"
+        },
+        {
+            "id": 2,
+            "name": "虚舟实验室",
+            "description": "探未来之境 · 载无界新生",
+            "icon": "https://www.caellab.com/static/image/icon/logo.png",
+            "iconType": "image",
+            "url": "https://www.caellab.com/"
+        },
+        {
+            "id": 3,
+            "name": "A.C·TD（狙宿/宿长）的个人主页",
+            "description": "一位开发者的ccw主页",
+            "icon": "https://m.ccw.site/avatar/87fa8782-68ff-4f6e-b225-7595e29171f6.png?x-oss-process=image%2Fresize%2Cs_150%2Fformat%2Cwebp",
+            "iconType": "image",
+            "url": "https://www.ccw.site/student/63ef2da0e77d1a05041bd28a"
+        },
+        {
+            "id": 4,
+            "name": "XIAOWU Blog",
+            "description": "一个喜欢学电脑的初中生创建的个人技术博客",
+            "icon": "https://youye-luna.top/upload/20251008_10023328.png",
+            "iconType": "image",
+            "url": "https://youye-luna.top"
+        },
+        {
+            "id": 5,
+            "name": "Kitten's Blog",
+            "description": "一只走在前端与设计不归路上的技术宅",
+            "icon": "https://gravatar.com/avatar/59cb46c14fe1df1292ca09a761b7cbe3",
+            "iconType": "image",
+            "url": "https://blog.skillcat.cn/"
+        }
+    ],
+    "quickLinks": [
+        {
+            "id": 1,
+            "name": "我的作品集",
+            "url": "/portfolio"
+        },
+        {
+            "id": 2,
+            "name": "技术文章",
+            "url": "/articles"
+        },
+        {
+            "id": 3,
+            "name": "开源项目",
+            "url": "/projects"
+        },
+        {
+            "id": 4,
+            "name": "联系我",
+            "url": "/contact"
+        }
+    ],
+    "playlist": [
+        {
+            "id": 1,
+            "title": "バケモノの唄",
+            "artist": " ",
+            "duration": 180,
+            "cover": "https://p2.music.126.net/zTh66C3TCVC257zdaPBKJw==/109951164906851042.jpg",
+            "audio": "https://ziyuan.world123.top/music/%E3%83%90%E3%82%B1%E3%83%A2%E3%83%8E%E3%81%AE%E5%94%84.mp3"
+        },
+        {
+            "id": 2,
+            "title": " 蜘蛛糸モノポリー",
+            "artist": "",
+            "duration": 240,
+            "cover": "https://p1.music.126.net/b6cwIaAUy5MXSm3iNC0KNg==/109951163352158677.jpg",
+            "audio": "https://ziyuan.world123.top/music/%E8%9C%98%E8%9B%9B%E7%B3%B8%E3%83%A2%E3%83%8E%E3%83%9D%E3%83%AA%E3%83%BC.mp3"
+        },
+        {
+            "id": 3,
+            "title": "权御天下 (2025官方重置版)",
+            "artist": " ",
+            "duration": 210,
+            "cover": "https://p2.music.126.net/K8rz1l6deNUTLzMDN7TW7g==/109951171458493945.jpg",
+            "audio": "https://ziyuan.world123.top/music/%E6%9D%83%E5%BE%A1%E5%A4%A9%E4%B8%8B%20(2025%E5%AE%98%E6%96%B9%E9%87%8D%E7%BD%AE%E7%89%88).mp3"
+        },
+            {
+            "id": 4,
+            "title": "Senbonzakura",
+            "artist": " ",
+            "duration": 210,
+            "cover": "https://p1.music.126.net/wNYE1PR-KJVjjRY0pxfT6g==/109951164905404725.jpg",
+            "audio": "https://ziyuan.world123.top/music/Senbonzakura.mp3"
+        }
+    ],
+    "themes": [
+        {
+            "id": "light",
+            "name": "亮白",
+            "color": "#f8fafc",
+            "bg": "#f1f5f9",
+            "text": "#475569"
+        },
+        {
+            "id": "graphite",
+            "name": "石墨黑",
+            "color": "#64748b",
+            "bg": "#1e293b",
+            "text": "#e2e8f0"
+        },
+        {
+            "id": "lime",
+            "name": "青柠",
+            "color": "#a3e635",
+            "bg": "#fefce8",
+            "text": "#4d7c0f"
+        },
+        {
+            "id": "lemon",
+            "name": "柠黄",
+            "color": "#fde68a",
+            "bg": "#fffbeb",
+            "text": "#a16207"
+        },
+        {
+            "id": "apple",
+            "name": "苹果绿",
+            "color": "#4ade80",
+            "bg": "#f0fdf4",
+            "text": "#166534"
+        },
+        {
+            "id": "water",
+            "name": "水蓝",
+            "color": "#60a5fa",
+            "bg": "#eff6ff",
+            "text": "#1e40af"
+        },
+        {
+            "id": "cherry",
+            "name": "樱红",
+            "color": "#fda4af",
+            "bg": "#fef2f2",
+            "text": "#9f1239"
+        },
+        {
+            "id": "lavender",
+            "name": "薰衣草紫",
+            "color": "#c4b5fd",
+            "bg": "#faf5ff",
+            "text": "#6b21a8"
+        }
+    ],
+    "footer": {
+        "copyright": "© 2026 鳞游. 保留所有权利.",
+        "extraInfo": "由Vue与Tailwind CSS 构建 | 本页面后端由 <a href='https://www.xiaojiyun.com/aff/WPNPVVXD' target='_blank'>小鸡云</a> 提供 | 我日常玩的免费mc服务器就在这开的 <a href='https://www.xiaojiyun.com/aff/WPNPVVXD' target='_blank'>点击查看</a>|<a href=\"https://icp.gov.moe/?keyword=20269994\" target=\"_blank\">萌ICP备20269994号</a>",
+        "links": [
+            {
+                "id": 1,
+                "name": "隐私政策",
+                "url": "#"
+            },
+            {
+                "id": 2,
+                "name": "使用条款",
+                "url": "#"
+            },
+            {
+                "id": 3,
+                "name": "站点地图",
+                "url": "#"
+            },
+            {
+                "id": 4,
+                "name": "友情链接",
+                "url": "#"
+            }
+        ]
+    },
+    "settings": {
+        "defaultTheme": "water",
+        "enableParticles": true,
+        "enableMusicPlayer": true,
+        "enableClickEffects": true
+    },
+    "poetryAPI": {
+        "enabled": true,
+        "sources": [
+            {
+                "url": "https://v1.jinrishici.com/all.json",
+                "responseType": "json",
+                "jsonPath": "content+\u0027——\u0027+author"
+            },
+            {
+                "url": "https://xiaojiyun.world123.top/yiyan/?format=text",
+                "responseType": "text",
+                "jsonPath": ""
+            },
+            {
+                "url": "https://xiaojiyun1.world123.top/yiyan/?format=text",
+                "responseType": "text",
+                "jsonPath": ""
+            },
+            {
+                "url": "https://xiaojiyun.world123.top/yiyan2/?format=text",
+                "responseType": "text",
+                "jsonPath": ""
+            },
+            {
+                "url": "https://xiaojiyun1.world123.top/yiyan2/?format=text",
+                "responseType": "text",
+                "jsonPath": ""
+            },
+            {
+                "url": "https://v1.hitokoto.cn/?encode=text",
+                "responseType": "text",
+                "jsonPath": ""
+            }
+        ]
+    },
+    "coreValues": [
+        "富强",
+        "民主",
+        "文明",
+        "和谐",
+        "自由",
+        "平等",
+        "公正",
+        "法治",
+        "爱国",
+        "敬业",
+        "诚信",
+        "友善",
+        "\u2000",
+        "\u2001",
+        "\u2002",
+        "\u2023",
+        "\u2004",
+        "\u2005",
+        "\u2006"
+    ]
+}
